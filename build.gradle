@@ -1,56 +1,52 @@
-buildscript {
-    dependencies {
-        classpath 'de.guntram.mcmod:crowdin-translate:1.4+1.19-pre2'
-    }
-    repositories {
-	maven {
-        name = 'CrowdinTranslate source'
-		url = "https://minecraft.guntram.de/maven/"
-	}
-    }
-}
 plugins {
-	id 'fabric-loom' version '0.12-+'
-	id "com.modrinth.minotaur" version "2.+"
-	id "com.matthewprenger.cursegradle" version "1.4.0"
+    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'maven-publish'
+    id "com.modrinth.minotaur" version "2.4.3"
 }
 
-apply plugin: 'de.guntram.mcmod.crowdin-translate'
-crowdintranslate.crowdinProjectName = 'durabilityviewer'
-crowdintranslate.verbose = false
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
 
 repositories {
-	maven {
-		url = "https://maven.fabricmc.net/"
-	}
-	maven {
-		url = "https://minecraft.guntram.de/maven/"
-	}
     maven {
-            url = "https://maven.terraformersmc.com/releases/"
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
     }
-	maven {
-		name = "Ladysnake Libs"
-		url = "https://ladysnake.jfrog.io/artifactory/mods"
-	}
-	maven {
-		url = "file://tmp/mymavenrepo/"
-	}    
+    maven {url "https://maven.terraformersmc.com/releases"}
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = "https://ladysnake.jfrog.io/artifactory/mods"
+    }
+    mavenLocal()
 }
 
-sourceCompatibility = 17
-targetCompatibility = 17
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-ext.Versions = new Properties()
-Versions.load(file("Versionfiles/mcversion-1.19.3.properties").newReader())
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-archivesBaseName = "durabilityviewer"
-ext.projectVersion = "1.10.3"
+    modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-version = "${Versions['minecraft_version']}-fabric${Versions['fabric_versiononly']}-${project.projectVersion}"
+    modImplementation "TechReborn:TechReborn-1.16:3.4.5+build.95"
 
-loom {
-    mixin.defaultRefmapName = "DurabilityViewer-refmap.json";
+    modImplementation "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
+    include "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
+
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
 }
 
 processResources {
@@ -61,57 +57,16 @@ processResources {
     }
 }
 
-dependencies {
-    minecraft  "com.mojang:minecraft:${Versions['minecraft_version']}"
-    mappings   "net.fabricmc:yarn:${Versions['yarn_mappings']}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${Versions['loader_version']}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${Versions['fabric_version']}"
-    modImplementation "TechReborn:TechReborn-1.16:3.4.5+build.95"
-    modImplementation "com.terraformersmc:modmenu:${Versions['modmenu_version']}"
-    modImplementation "de.guntram.mcmod:crowdin-translate:${Versions['crowdintranslate_version']}"
-    include    "de.guntram.mcmod:crowdin-translate:${Versions['crowdintranslate_version']}"
-    
-    modImplementation "de.guntram.mcmod:GBfabrictools:${Versions['gbfabrictools_version']}"
-    include    "de.guntram.mcmod:GBfabrictools:${Versions['gbfabrictools_version']}"
-    
-	modImplementation "dev.emi:trinkets:3.0.0"
-}
-
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
+java {
+    withSourcesJar()
 }
 
 jar {
-	from "LICENSE"
-}
-
-processResources {
-	dependsOn downloadTranslations
-}
-
-import com.modrinth.minotaur.TaskModrinthUpload
-
-modrinth {
-    projectId = 'durabilityviewer'
-    versionName = project.archivesBaseName
-    uploadFile = remapJar
-}
-
-curseforge {
-    apiKey = System.getenv("CURSEFORGE_TOKEN") ?: "0"
-    project {
-        id = '262146'
-        releaseType = 'release'
-        addGameVersion("${Versions['minecraft_version']}")
-        addGameVersion("Java "+targetCompatibility)
-        addGameVersion("Fabric")
-        mainArtifact(remapJar)
+    from("LICENSE") {
+        rename { "${it}_${archiveBaseName}" }
     }
-    options {
-        forgeGradleIntegration = false
-    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
 }

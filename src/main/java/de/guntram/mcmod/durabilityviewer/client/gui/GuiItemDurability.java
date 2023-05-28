@@ -330,7 +330,7 @@ public class GuiItemDurability
         stack.scale(scale, scale, scale);
         RenderSystem.applyModelViewMatrix();
         
-        itemRenderer.renderGuiItemIcon(itemStack, (int)((xWarn)/scale-8), (int)((yWarn)/scale-8));
+        itemRenderer.renderGuiItemIcon(new MatrixStack(), itemStack, (int)((xWarn)/scale-8), (int)((yWarn)/scale-8));
         
         stack.pop();
         RenderSystem.applyModelViewMatrix();
@@ -377,7 +377,7 @@ public class GuiItemDurability
                     result.width=width;
                 if (reallyDraw) {
                     int color=item.getDisplayColor();
-                    itemRenderer.renderGuiItemIcon(item.getItemStack(), numberPos == RenderPos.left ? xpos+maxWidth-iconWidth-spacing : xpos, ypos+result.height);
+                    itemRenderer.renderGuiItemIcon(new MatrixStack(), item.getItemStack(), numberPos == RenderPos.left ? xpos+maxWidth-iconWidth-spacing : xpos, ypos+result.height);
                     fontRenderer.draw(stack, displayString, numberPos != RenderPos.right ? xpos : xpos+iconWidth+spacing, ypos+result.height+fontRenderer.fontHeight/2 + (numberPos==RenderPos.over ? 10  : 0), color);
                 }
                 result.height+=16;

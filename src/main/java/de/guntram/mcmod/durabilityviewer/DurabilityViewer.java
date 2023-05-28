@@ -1,6 +1,5 @@
 package de.guntram.mcmod.durabilityviewer;
 
-import de.guntram.mcmod.crowdintranslate.CrowdinTranslate;
 import de.guntram.mcmod.durabilityviewer.client.gui.GuiItemDurability;
 import de.guntram.mcmod.durabilityviewer.handler.ConfigurationHandler;
 import de.guntram.mcmod.fabrictools.ConfigurationProvider;
@@ -23,7 +22,6 @@ public class DurabilityViewer implements ClientModInitializer
     
     @Override
     public void onInitializeClient() {
-        CrowdinTranslate.downloadTranslations(MODID);
         setKeyBindings();
         confHandler=ConfigurationHandler.getInstance();
         ConfigurationProvider.register(MODNAME, confHandler);
