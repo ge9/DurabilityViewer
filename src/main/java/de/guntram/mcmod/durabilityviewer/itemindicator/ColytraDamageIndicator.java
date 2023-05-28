@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 /**
- *
  * @author gbl
  */
 public class ColytraDamageIndicator extends ItemDamageIndicator {
@@ -22,9 +21,9 @@ public class ColytraDamageIndicator extends ItemDamageIndicator {
         if (elytraMaxDamage == 0) {
             newElytra = new ItemStack(Items.ELYTRA);
             elytraMaxDamage = newElytra.getMaxDamage();
-        }        
+        }
     }
-    
+
     private int getDamage() {
         int damage;
         try {

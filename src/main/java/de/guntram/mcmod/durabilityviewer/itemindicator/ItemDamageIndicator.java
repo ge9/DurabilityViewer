@@ -24,15 +24,15 @@ public class ItemDamageIndicator implements ItemIndicator {
         }
         return calculateDisplayValue(stack.getMaxDamage(), stack.getDamage());
     }
-    
+
     public static String calculateDisplayValue(int max, int dam) {
-        int cur=max-dam;
+        int cur = max - dam;
 
         int shown;
-        if (cur > max * ConfigurationHandler.showDamageOverPercent()/100) {
-            shown=-dam;
+        if (cur > max * ConfigurationHandler.showDamageOverPercent() / 100) {
+            shown = -dam;
         } else {
-            shown=cur;
+            shown = cur;
         }
         if (ConfigurationHandler.getShowPercentValues()) {
             return String.format("%.1f%%", shown * 100.0 / max);
@@ -42,24 +42,24 @@ public class ItemDamageIndicator implements ItemIndicator {
 
     @Override
     public int getDisplayColor() {
-        int max=stack.getMaxDamage();
-        int cur=stack.getDamage();
+        int max = stack.getMaxDamage();
+        int cur = stack.getDamage();
         return calculateDisplayColor(max, cur);
     }
-    
+
     public static int calculateDisplayColor(int max, int cur) {
-        if (cur < max/5)
+        if (cur < max / 5)
             return color_green;
-        if (cur > max*9/10 && cur>max-100)
+        if (cur > max * 9 / 10 && cur > max - 100)
             return color_red;
-        if (cur > max*4/5 && cur>max-200)
+        if (cur > max * 4 / 5 && cur > max - 200)
             return color_yellow;
         return color_white;
     }
-    
+
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty() || (stack.getMaxDamage() - stack.getDamage() > stack.getMaxDamage() * ConfigurationHandler.hideDamageOverPercent()/100);
+        return stack.isEmpty() || (stack.getMaxDamage() - stack.getDamage() > stack.getMaxDamage() * ConfigurationHandler.hideDamageOverPercent() / 100);
     }
 
     @Override

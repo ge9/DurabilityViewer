@@ -11,25 +11,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public abstract class PotionEffectsMixin {
-    
+
     private static GuiItemDurability gui;
-    
-    @Inject(method="renderStatusEffectOverlay", at=@At("RETURN"))
-    
+
+    @Inject(method = "renderStatusEffectOverlay", at = @At("RETURN"))
     private void afterRenderStatusEffects(MatrixStack stack, CallbackInfo ci) {
-        if (gui==null)
-            gui=new GuiItemDurability();
+        if (gui == null)
+            gui = new GuiItemDurability();
         gui.afterRenderStatusEffects(stack, 0);
     }
 
-    @Inject(method="render", at=@At(
-            value="FIELD", 
-            target="Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", 
-            opcode = Opcodes.GETFIELD, args = {"log=false"}))
-    
+    @Inject(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD, args = {"log=false"}))
     private void beforeRenderDebugScreen(MatrixStack stack, float f, CallbackInfo ci) {
-        if (gui==null)
-            gui=new GuiItemDurability();
+        if (gui == null)
+            gui = new GuiItemDurability();
         gui.onRenderGameOverlayPost(stack, 0);
     }
 }
