@@ -1,6 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.mixin;
 
 import de.guntram.mcmod.durabilityviewer.client.gui.GuiItemDurability;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.objectweb.asm.Opcodes;
@@ -15,16 +16,16 @@ public abstract class PotionEffectsMixin {
     private static GuiItemDurability gui;
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("RETURN"))
-    private void afterRenderStatusEffects(MatrixStack stack, CallbackInfo ci) {
+    private void afterRenderStatusEffects(DrawContext context, CallbackInfo ci) {
         if (gui == null)
             gui = new GuiItemDurability();
-        gui.afterRenderStatusEffects(stack, 0);
+        gui.afterRenderStatusEffects(context, 0);
     }
 
     @Inject(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD, args = {"log=false"}))
-    private void beforeRenderDebugScreen(MatrixStack stack, float f, CallbackInfo ci) {
+    private void beforeRenderDebugScreen(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (gui == null)
             gui = new GuiItemDurability();
-        gui.onRenderGameOverlayPost(stack, 0);
+        gui.onRenderGameOverlayPost(context, 0);
     }
 }
