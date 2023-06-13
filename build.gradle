@@ -70,3 +70,41 @@ jar {
 tasks.withType(JavaCompile).configureEach {
     it.options.release = 17
 }
+
+tasks.publish.dependsOn build
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId project.archivesBaseName
+
+            // add all the jars that should be included when publishing to maven
+            //artifact(jar)             { builtBy remapJar }
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url "$projectDir/../../CommonMaven"
+        }
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = project.modrinth_id
+    versionNumber = project.mod_version
+    versionName = "DurabilityViewer ${project.mod_version}"
+    versionType = isMCVersionNonRelease() ? "beta" : "release"
+    changelog = file("changelog.md").text
+    uploadFile = remapJar
+    gameVersions = [ project.minecraft_version ]
+    loaders = [ "fabric" ]
+    dependencies {
+        required.project 'fabric-api'
+    }
+}
+
+boolean isMCVersionNonRelease() {
+    return project.minecraft_version.matches('^\\d\\dw\\d\\d[a-z]$') || project.minecraft_version.matches('\\d+\\.\\d+-(pre|rc)(\\d+)')
+}
