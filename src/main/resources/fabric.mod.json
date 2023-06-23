@@ -5,7 +5,7 @@
     "environment": "client",
     "entrypoints": {
         "client": [ "de.guntram.mcmod.durabilityviewer.DurabilityViewer" ],
-        "modmenu": [ "de.guntram.mcmod.durabilityviewer.handler.MMConfigurationHandler" ]
+        "modmenu": [ "de.guntram.mcmod.durabilityviewer.config.ModMenuImpl" ]
     },
     "custom": {
         "modupdater": {
@@ -22,10 +22,10 @@
     "recommends": {
         "modmenu" : "*"
     },
-    "name": "Giselbaers Durability Viewer",
+    "name": "Durability Viewer",
     "description": "Shows various things about the game:\n- the remaining/missing durability on your armor and tools\n- the amount of arrows in your inventory when you're wielding a bow\n- the number of empty inventory slots\n- timeouts for status effects",
     "icon": "icon.png",
-    "authors": [ "Giselbaer" ],
+    "authors": [ "Giselbaer", "fanta" ],
     "contact": {
         "homepage": "https://www.curseforge.com/minecraft/mc-mods/giselbaers-durability-viewer",
         "sources": "https://github.com/gbl/DurabilityViewer",

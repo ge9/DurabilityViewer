@@ -1,6 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.mixin;
 
-import de.guntram.mcmod.durabilityviewer.handler.ConfigurationHandler;
+import de.guntram.mcmod.durabilityviewer.config.Configs;
+import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.resource.language.I18n;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.awt.*;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -42,11 +45,9 @@ public abstract class TooltipMixin {
     private void getTooltipdone(PlayerEntity playerIn, TooltipContext advanced, CallbackInfoReturnable<List<Text>> ci, List<Text> list) {
         if (!advanced.isAdvanced() && !this.isEmpty()) {
             if (this.isDamaged()) {
-                Text toolTip = Text.literal(I18n.translate("tooltip.durability",
-                                (this.getMaxDamage() - this.getDamage()) +
-                                        " / " +
-                                        this.getMaxDamage()))
-                        .formatted(ConfigurationHandler.getTooltipColor());
+                Color4f color4f = Configs.Settings.TooltipColor.getColor();
+                Color color = new Color(color4f.r, color4f.g, color4f.b);
+                Text toolTip = Text.translatable("item.durability", this.getMaxDamage() - this.getDamage(), this.getMaxDamage()).setStyle(Style.EMPTY.withColor(color.getRGB()));
                 if (!list.contains(toolTip)) {
                     list.add(toolTip);
                 }

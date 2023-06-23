@@ -1,6 +1,6 @@
 package de.guntram.mcmod.durabilityviewer.sound;
 
-import de.guntram.mcmod.durabilityviewer.handler.ConfigurationHandler;
+import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
@@ -38,8 +38,8 @@ public class ColytraBreakingWarner extends ItemBreakingWarner {
 
         int newDurability = elytraMaxDamage - damage;
         if (newDurability < lastDurability
-                && newDurability < ConfigurationHandler.getMinDurability()
-                && newDurability * 100 / ConfigurationHandler.getMinPercent() < elytraMaxDamage) {
+                && newDurability < Configs.Settings.SoundBelowDurability.getIntegerValue()
+                && newDurability * 100 / Configs.Settings.SoundBelowPercent.getIntegerValue() < elytraMaxDamage) {
             lastDurability = newDurability;
             return true;
         }

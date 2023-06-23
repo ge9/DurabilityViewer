@@ -1,1 +1,2 @@
-- Update 1.20.1
+- Change Config GUI to MaliLib GUI
+- Old settings will not be applied

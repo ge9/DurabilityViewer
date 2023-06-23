@@ -28,6 +28,7 @@ repositories {
         name = "Ladysnake Libs"
         url = "https://ladysnake.jfrog.io/artifactory/mods"
     }
+    maven { url 'https://masa.dy.fi/maven' }
     mavenLocal()
 }
 
@@ -42,8 +43,10 @@ dependencies {
 
     modImplementation "TechReborn:TechReborn-1.16:3.4.5+build.95"
 
-    modImplementation "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
-    include "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
+    //modImplementation "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
+    //include "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
+
+    modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_out}:${project.malilib_version}"
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"

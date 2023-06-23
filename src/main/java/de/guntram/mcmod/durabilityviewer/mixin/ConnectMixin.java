@@ -1,7 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.mixin;
 
 import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
-import de.guntram.mcmod.durabilityviewer.handler.ConfigurationHandler;
+import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
@@ -16,7 +16,7 @@ public abstract class ConnectMixin {
 
     @Inject(method = "onGameJoin", at = @At("RETURN"))
     private void onConnectedToServerEvent(GameJoinS2CPacket packet, CallbackInfo cbi) {
-        if (!ConfigurationHandler.showPlayerServerName())
+        if (!Configs.Settings.SetWindowTitle.getBooleanValue())
             return;
         MinecraftClient mc = MinecraftClient.getInstance();
         ServerInfo serverData = mc.getCurrentServerEntry();
@@ -32,7 +32,7 @@ public abstract class ConnectMixin {
 
     @Inject(method = "onDisconnected", at = @At("HEAD"))
     public void onDisconnectFromServerEvent(CallbackInfo cbi) {
-        if (!ConfigurationHandler.showPlayerServerName())
+        if (!Configs.Settings.SetWindowTitle.getBooleanValue())
             return;
         MinecraftClient mc = MinecraftClient.getInstance();
         DurabilityViewer.setWindowTitle(mc.getSession().getUsername() + " not connected");

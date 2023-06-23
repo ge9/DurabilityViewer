@@ -6,7 +6,7 @@
 package de.guntram.mcmod.durabilityviewer.sound;
 
 import de.guntram.mcmod.durabilityviewer.DurabilityViewer;
-import de.guntram.mcmod.durabilityviewer.handler.ConfigurationHandler;
+import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
@@ -38,8 +38,8 @@ public class ItemBreakingWarner {
             return false;
         int newDurability = stack.getMaxDamage() - stack.getDamage();
         if (newDurability < lastDurability
-                && newDurability < ConfigurationHandler.getMinDurability()
-                && newDurability * 100 / ConfigurationHandler.getMinPercent() < stack.getMaxDamage()) {
+                && newDurability < Configs.Settings.SoundBelowDurability.getIntegerValue()
+                && newDurability * 100 / Configs.Settings.SoundBelowPercent.getIntegerValue() < stack.getMaxDamage()) {
             lastDurability = newDurability;
             return true;
         }

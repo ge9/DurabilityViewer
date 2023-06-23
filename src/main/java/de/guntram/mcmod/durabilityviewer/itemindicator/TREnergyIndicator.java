@@ -5,7 +5,7 @@
  */
 package de.guntram.mcmod.durabilityviewer.itemindicator;
 
-import de.guntram.mcmod.durabilityviewer.handler.ConfigurationHandler;
+import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.minecraft.item.ItemStack;
 import team.reborn.energy.EnergyHolder;
 
@@ -32,7 +32,7 @@ public class TREnergyIndicator implements ItemIndicator {
         if (stack.getNbt() != null) {
             energy = stack.getNbt().getDouble("energy");
         }
-        if (ConfigurationHandler.getShowPercentValues() && maxEnergy > 0) {
+        if (Configs.Settings.Percentages.getBooleanValue() && maxEnergy > 0) {
             return String.format("§o%.1f%%", energy / maxEnergy * 100);
         }
         if (energy > 10_000_000) {
