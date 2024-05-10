@@ -28,10 +28,10 @@ public class TREnergyIndicator implements ItemIndicator {
 
     @Override
     public String getDisplayValue() {
-        double energy = 0;
-        if (stack.getNbt() != null) {
-            energy = stack.getNbt().getDouble("energy");
-        }
+        double energy = 0.0;
+        /*if (stack.getNbt() != null) {
+           energy = stack.getNbt().getDouble("energy");
+        }*/
         if (Configs.Settings.Percentages.getBooleanValue() && maxEnergy > 0) {
             return String.format("§o%.1f%%", energy / maxEnergy * 100);
         }
@@ -46,7 +46,7 @@ public class TREnergyIndicator implements ItemIndicator {
 
     @Override
     public int getDisplayColor() {
-        double energy = stack.getNbt().getDouble("energy");
+        double energy = 0.0;//stack.getNbt().getDouble("energy");
         if (energy > maxEnergy * 0.2) {
             return color_green;
         } else if (energy > maxEnergy * 0.1) {

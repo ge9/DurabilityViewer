@@ -27,6 +27,8 @@ public class DurabilityViewer implements ClientModInitializer {
         changedWindowTitle = null;
 
         Configs.loadFromFile();
+
+        new Events().init(); //init Fabric Events
     }
 
     public static void setWindowTitle(String s) {

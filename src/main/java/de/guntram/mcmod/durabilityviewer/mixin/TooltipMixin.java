@@ -1,25 +1,14 @@
 package de.guntram.mcmod.durabilityviewer.mixin;
 
-import de.guntram.mcmod.durabilityviewer.config.Configs;
-import fi.dy.masa.malilib.util.Color4f;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.awt.*;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -38,10 +27,7 @@ public abstract class TooltipMixin {
     @Shadow
     public abstract int getDamage();
 
-    @Shadow
-    public abstract NbtCompound getNbt();
-
-    @Inject(method = "getTooltip", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
+    /*@Inject(method = "getTooltip", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
     private void getTooltipdone(PlayerEntity playerIn, TooltipContext advanced, CallbackInfoReturnable<List<Text>> ci, List<Text> list) {
         if (!advanced.isAdvanced() && !this.isEmpty()) {
             if (this.isDamaged()) {
@@ -60,7 +46,7 @@ public abstract class TooltipMixin {
                 addNbtCompound("", list, tag);
             }
         }
-    }
+    }*/
 
     private void addNbtCompound(String prefix, List<Text> list, NbtCompound tag) {
         TreeSet<String> sortedKeys = new TreeSet<>(tag.getKeys());

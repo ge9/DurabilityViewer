@@ -32,6 +32,7 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joml.Matrix4fStack;
 import team.reborn.energy.EnergyHolder;
 
 import java.util.Collection;
@@ -155,9 +156,9 @@ public class GuiItemDurability {
 
         ItemStack chestItem = player.getEquippedStack(EquipmentSlot.CHEST);
         ItemIndicator colytra = null;
-        if (chestItem != null && chestItem.getNbt() != null && chestItem.getNbt().contains("colytra:ElytraUpgrade")) {
+        /*if (chestItem != null && chestItem.getNbt() != null && chestItem.getNbt().contains("colytra:ElytraUpgrade")) {
             colytra = new ColytraDamageIndicator(chestItem);
-        }
+        }*/
 
         ItemIndicator boots = new ItemDamageIndicator(player.getEquippedStack(EquipmentSlot.FEET));
         ItemIndicator leggings = new ItemDamageIndicator(player.getEquippedStack(EquipmentSlot.LEGS));
@@ -220,7 +221,7 @@ public class GuiItemDurability {
 
         // Moved this check to down here, in order to play the 
         // warning sound / do the visible 
-        if (!visible || minecraft.options.debugEnabled) {
+        if (!visible || minecraft.getDebugHud().shouldShowDebugHud()) {
             return;
         }
 
@@ -319,9 +320,9 @@ public class GuiItemDurability {
         if (stack.isDamageable()) {
             return new ItemDamageIndicator(stack);
         } else if (haveTRCore) {
-            if (stack.getItem() instanceof EnergyHolder && stack.getNbt() != null && stack.getNbt().contains("energy", 6)) {
+            /*if (stack.getItem() instanceof EnergyHolder && stack.getNbt() != null && stack.getNbt().contains("energy", 6)) {
                 return new TREnergyIndicator(stack);
-            }
+            }*/
         }
         return new ItemDamageIndicator(stack);
     }
@@ -335,14 +336,14 @@ public class GuiItemDurability {
 
         context.fill(0, 0, mainWindow.getScaledWidth(), mainWindow.getScaledHeight(), 0xff0000 + ((int) (alpha * 128) << 24));
 
-        MatrixStack stack = RenderSystem.getModelViewStack();
-        stack.push();
+        Matrix4fStack stack = RenderSystem.getModelViewStack();
+        stack.pushMatrix();
         stack.scale(scale, scale, scale);
         RenderSystem.applyModelViewMatrix();
 
         context.drawItem(itemStack, (int) ((xWarn) / scale - 8), (int) ((yWarn) / scale - 8));
 
-        stack.pop();
+        stack.popMatrix();
         RenderSystem.applyModelViewMatrix();
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -356,7 +357,7 @@ public class GuiItemDurability {
             int posGood = 0, posBad = 0;
             for (StatusEffectInstance potioneffect : Ordering.natural().reverse().sortedCopy(collection)) {
                 if (potioneffect.shouldShowIcon()) {
-                    StatusEffect potion = potioneffect.getEffectType();
+                    StatusEffect potion = potioneffect.getEffectType().value();
                     int xpos = mainWindow.getScaledWidth();
                     int ypos;
                     if (potion.isBeneficial()) {     // isBeneficial
@@ -404,11 +405,11 @@ public class GuiItemDurability {
 
     public int getTrinketSlotCount(LivingEntity player) {
         Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        return component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).size()).orElse(0);
+        return 0;//component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).size()).orElse(0);
     }
 
     public List<ItemStack> getTrinkets(LivingEntity player) {
         Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-        return component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).stream().map(Pair::getRight).toList()).orElse(null);
+        return null;//component.map(trinketComponent -> trinketComponent.getEquipped(prdct -> true).stream().map(Pair::getRight).toList()).orElse(null);
     }
 }

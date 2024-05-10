@@ -21,13 +21,14 @@ public class ColytraBreakingWarner extends ItemBreakingWarner {
 
     @Override
     public boolean checkBreaks(ItemStack stack) {
-        if (stack.getNbt() == null || !stack.getNbt().contains("colytra:ElytraUpgrade")) {
+        return false;
+        /*if (stack.getNbt() == null || !stack.getNbt().contains("colytra:ElytraUpgrade")) {
             return false;
         }
 
         int damage;
         try {
-            damage = stack.getNbt().getCompound("colytra:ElytraUpgrade").getCompound("tag").getInt("Damage");
+            damage = 0;//stack.getNbt().getCompound("colytra:ElytraUpgrade").getCompound("tag").getInt("Damage");
         } catch (Exception ex) {
             return false;
         }
@@ -44,6 +45,6 @@ public class ColytraBreakingWarner extends ItemBreakingWarner {
             return true;
         }
         lastDurability = newDurability;
-        return false;
+        return false;*/
     }
 }

@@ -16,13 +16,13 @@ public abstract class PotionEffectsMixin {
     private static GuiItemDurability gui;
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("RETURN"))
-    private void afterRenderStatusEffects(DrawContext context, CallbackInfo ci) {
+    private void afterRenderStatusEffects(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (gui == null)
             gui = new GuiItemDurability();
         gui.afterRenderStatusEffects(context, 0);
     }
 
-    @Inject(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;debugEnabled:Z", opcode = Opcodes.GETFIELD, args = {"log=false"}))
+    @Inject(method = "renderMainHud", at = @At(value = "RETURN", opcode = Opcodes.GETFIELD, args = {"log=false"}))
     private void beforeRenderDebugScreen(DrawContext context, float tickDelta, CallbackInfo ci) {
         if (gui == null)
             gui = new GuiItemDurability();
