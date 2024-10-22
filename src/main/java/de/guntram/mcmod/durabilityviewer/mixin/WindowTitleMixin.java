@@ -18,12 +18,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(MinecraftClient.class)
 public class WindowTitleMixin {
-    @Inject(method = "getWindowTitle", at = @At("HEAD"), cancellable = true)
-    private void patchWindowTitle(CallbackInfoReturnable<String> cir) {
+
+    @Inject(method = "getWindowTitle()Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
+    public final void getWindowTitle(CallbackInfoReturnable<String> cir) {
         if (Configs.Settings.SetWindowTitle.getBooleanValue()) {
             if (DurabilityViewer.getWindowTitle() != null) {
                 cir.setReturnValue(DurabilityViewer.getWindowTitle());
             }
         }
     }
+
+
+    /*@Shadow
+    @Final
+    private long handle;
+    @Overwrite
+    public void setTitle(String title) {
+        if (DurabilityViewer.getWindowTitle() != null) {
+            title = DurabilityViewer.getWindowTitle();
+        }
+        GLFW.glfwSetWindowTitle(this.handle, title);
+    }*/
 }

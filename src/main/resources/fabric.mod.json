@@ -7,15 +7,10 @@
         "client": [ "de.guntram.mcmod.durabilityviewer.DurabilityViewer" ],
         "modmenu": [ "de.guntram.mcmod.durabilityviewer.config.ModMenuImpl" ]
     },
-    "custom": {
-        "modupdater": {
-            "strategy": "json",
-            "url": "https://raw.githubusercontent.com/gbl/ModVersionInfo/master/DurabilityViewer.json"
-        }
-    },
     "mixins": [
       	"mixins.durabilityviewer.json"
     ],
+    "accessWidener" : "durabilityviewer.accesswidener",
     "depends": {
         "fabric": "*"
     },
@@ -27,8 +22,8 @@
     "icon": "icon.png",
     "authors": [ "Giselbaer", "fanta" ],
     "contact": {
-        "homepage": "https://www.curseforge.com/minecraft/mc-mods/giselbaers-durability-viewer",
-        "sources": "https://github.com/gbl/DurabilityViewer",
-        "issues": "https://github.com/gbl/DurabilityViewer/issues"
+        "homepage": "https://modrinth.com/mod/durability-viewer-updated",
+        "sources": "https://github.com/fantahund/DurabilityViewer",
+        "issues": "https://github.com/fantahund/DurabilityViewer/issues"
     }
 }

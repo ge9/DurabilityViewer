@@ -4,12 +4,10 @@ import com.google.common.collect.Ordering;
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import de.guntram.mcmod.durabilityviewer.config.WarnMode;
-import de.guntram.mcmod.durabilityviewer.itemindicator.ColytraDamageIndicator;
 import de.guntram.mcmod.durabilityviewer.itemindicator.InventorySlotsIndicator;
 import de.guntram.mcmod.durabilityviewer.itemindicator.ItemCountIndicator;
 import de.guntram.mcmod.durabilityviewer.itemindicator.ItemDamageIndicator;
 import de.guntram.mcmod.durabilityviewer.itemindicator.ItemIndicator;
-import de.guntram.mcmod.durabilityviewer.itemindicator.TREnergyIndicator;
 import de.guntram.mcmod.durabilityviewer.sound.ColytraBreakingWarner;
 import de.guntram.mcmod.durabilityviewer.sound.ItemBreakingWarner;
 import dev.emi.trinkets.api.TrinketComponent;
@@ -19,7 +17,6 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.Window;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -29,11 +26,9 @@ import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.RangedWeaponItem;
 import net.minecraft.util.Arm;
-import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4fStack;
-import team.reborn.energy.EnergyHolder;
 
 import java.util.Collection;
 import java.util.List;
@@ -91,12 +86,6 @@ public class GuiItemDurability {
         } catch (ClassNotFoundException ex) {
             LOGGER.info("DurabilityViewer did not find Trinkets API");
             trinketWarners = new ItemBreakingWarner[0];
-        }
-        try {
-            Class.forName("team.reborn.energy.EnergyHolder");
-            haveTRCore = true;
-        } catch (ClassNotFoundException ex) {
-            LOGGER.info("DurabilityViewer did not find Tech Reborn");
         }
     }
 

@@ -1,13 +1,9 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
-    id "com.modrinth.minotaur" version "2.4.3"
+    id "com.modrinth.minotaur" version "2.8.7"
 }
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -26,9 +22,8 @@ repositories {
     }
     maven {
         name = "Ladysnake Libs"
-        url = "https://maven.ladysnake.org/releases"
+        url = 'https://maven.ladysnake.org/releases'
     }
-    maven { url 'https://masa.dy.fi/maven' }
     mavenLocal()
 }
 
@@ -40,11 +35,6 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
-
-    modImplementation "TechReborn:TechReborn-1.16:3.4.5+build.95"
-
-    //modImplementation "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
-    //include "de.guntram.mcmod:GBfabrictools:${project.gbfabrictools_version}"
 
     modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_out}:${project.malilib_version}"
 
@@ -68,6 +58,10 @@ jar {
     from("LICENSE") {
         rename { "${it}_${archiveBaseName}" }
     }
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/durabilityviewer.accesswidener")
 }
 
 tasks.withType(JavaCompile).configureEach {
