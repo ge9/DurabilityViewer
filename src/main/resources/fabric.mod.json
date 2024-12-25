@@ -12,7 +12,8 @@
     ],
     "accessWidener" : "durabilityviewer.accesswidener",
     "depends": {
-        "fabric": "*"
+        "fabric-api": "*",
+        "malilib": "*"
     },
     "recommends": {
         "modmenu" : "*"

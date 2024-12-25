@@ -24,6 +24,7 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
+    maven { url 'https://jitpack.io' }
     mavenLocal()
 }
 
@@ -36,7 +37,7 @@ dependencies {
 
     modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_out}:${project.malilib_version}"
+    modImplementation "com.github.sakura-ryoko:malilib:${project.minecraft_version_out}-${project.malilib_version}"
 
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
     modApi "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}"
