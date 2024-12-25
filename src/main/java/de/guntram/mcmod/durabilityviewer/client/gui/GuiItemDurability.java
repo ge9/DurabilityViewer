@@ -328,12 +328,12 @@ public class GuiItemDurability {
         Matrix4fStack stack = RenderSystem.getModelViewStack();
         stack.pushMatrix();
         stack.scale(scale, scale, scale);
-        RenderSystem.applyModelViewMatrix();
+        //RenderSystem.applyModelViewMatrix();
 
         context.drawItem(itemStack, (int) ((xWarn) / scale - 8), (int) ((yWarn) / scale - 8));
 
         stack.popMatrix();
-        RenderSystem.applyModelViewMatrix();
+        //RenderSystem.applyModelViewMatrix();
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
