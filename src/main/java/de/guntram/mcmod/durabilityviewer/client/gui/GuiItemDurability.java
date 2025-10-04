@@ -91,7 +91,7 @@ public class GuiItemDurability {
 
     private int getInventoryArrowCount() {
         int arrows = 0;
-        for (final ItemStack stack : minecraft.player.getInventory().main) {
+        for (final ItemStack stack : minecraft.player.getInventory().getMainStacks()) {
             if (isArrow(stack)) {
                 arrows += stack.getCount();
             }
@@ -270,7 +270,7 @@ public class GuiItemDurability {
             }
         }
 
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         if (Configs.Settings.ArmorAroundHotbar.getBooleanValue()) {
             int leftOffset = -120;
@@ -335,7 +335,7 @@ public class GuiItemDurability {
         stack.popMatrix();
         //RenderSystem.applyModelViewMatrix();
 
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     public void afterRenderStatusEffects(DrawContext context, float partialTicks) {
