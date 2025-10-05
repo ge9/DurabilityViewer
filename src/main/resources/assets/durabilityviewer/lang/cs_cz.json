@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Pokud máte Trinkets mod, zobrazit všechny trinkety i v případě, že nemají životnost/poškození",
     "durabilityviewer.config.tt.percentvalues": "Zobrazit procenta namísto absolutních hodnot",
     "durabilityviewer.config.tt.warnmode": "Jak varovat když se má předmět rozbít",
-    "key.categories.durabilityviewer": "Prohlížeč Životnosti",
+    "key.category.durabilityviewer.keys": "Prohlížeč Životnosti",
     "key.durabilityviewer.showhide": "Zobrazit/skrýt zobrazení životnosti",
     "tooltip.durability": "Životnost %s",
     "durabilityviewer.subtitle.toolBreaking": "Nástroj těsně před rozbitím",

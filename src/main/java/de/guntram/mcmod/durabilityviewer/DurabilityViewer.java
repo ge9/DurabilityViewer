@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +21,7 @@ public class DurabilityViewer implements ClientModInitializer {
     private static String changedWindowTitle;
     private KeyBinding showHide;
     public static final Logger LOGGER = LogManager.getLogger("DurabilityViewer");
+    public static KeyBinding.Category DurabilityViewerCat = KeyBinding.Category.create(Identifier.of("durabilityviewer","keys"));
 
     @Override
     public void onInitializeClient() {
@@ -46,8 +48,7 @@ public class DurabilityViewer implements ClientModInitializer {
     }
 
     public void setKeyBindings() {
-        final String category = "key.categories.durabilityviewer";
-        KeyBindingHelper.registerKeyBinding(showHide = new KeyBinding("key.durabilityviewer.showhide", InputUtil.Type.KEYSYM, GLFW_KEY_H, category));
+        KeyBindingHelper.registerKeyBinding(showHide = new KeyBinding("key.durabilityviewer.showhide", InputUtil.Type.KEYSYM, GLFW_KEY_H, DurabilityViewerCat));
         ClientTickEvents.END_CLIENT_TICK.register(e -> processKeyBinds());
     }
 }
