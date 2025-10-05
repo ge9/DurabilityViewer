@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Wenn Trinkets Mod installiert ist, auch Trinkets ohne Haltbarkeit/Schaden anzeigen",
     "durabilityviewer.config.tt.percentvalues": "Prozentwerte anstelle von absoluten Werten anzeigen",
     "durabilityviewer.config.tt.warnmode": "Wie soll gewarnt werden, wenn ein Gegenstand fast zerstört ist",
-    "key.categories.durabilityviewer": "Haltbarkeitsansicht",
+    "key.category.durabilityviewer.keys": "Haltbarkeitsansicht",
     "key.durabilityviewer.showhide": "Haltbarkeit zeigen/verstecken",
     "tooltip.durability": "Haltbarkeit %s",
     "durabilityviewer.subtitle.toolBreaking": "Gegenstand kurz vor dem Zerbrechen",

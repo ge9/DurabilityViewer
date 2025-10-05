@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Jeśli masz modyfikację Trinkets, pokazuj wszystkie akcesoria, nawet jeśli nie mają wytrzymałości/zniszczeń",
     "durabilityviewer.config.tt.percentvalues": "Pokaż procenty zamiast wartości bezwzględnych",
     "durabilityviewer.config.tt.warnmode": "Jak ostrzec kiedy przedmiot wkrótce się zniszczy",
-    "key.categories.durabilityviewer": "Dozorca wytrzymałości",
+    "key.category.durabilityviewer.keys": "Dozorca wytrzymałości",
     "key.durabilityviewer.showhide": "Pokaż/ukryj widok wytrzymałości",
     "tooltip.durability": "Wytrzymałość %s",
     "durabilityviewer.subtitle.toolBreaking": "Przedmiot bliski zniszczenia",

@@ -27,7 +27,7 @@
     "durabilityviewer.config.tt.showalltrinkets": "Si tienes el mod trinkets, muestra todos los trinkets incluso cuando no tienen durabilidad/daño",
     "durabilityviewer.config.tt.percentvalues": "Mostrar porcentajes en lugar de valores absolutos",
     "durabilityviewer.config.tt.warnmode": "Cómo avisar cuando un item está a punto de romperse",
-    "key.categories.durabilityviewer": "Visualizador de durabilidad",
+    "key.category.durabilityviewer.keys": "Visualizador de durabilidad",
     "key.durabilityviewer.showhide": "Mostrar / ocultar la durabilidad",
     "tooltip.durability": "Durabilidad %s",
     "durabilityviewer.subtitle.toolBreaking": "Ítem a punto de romper",
