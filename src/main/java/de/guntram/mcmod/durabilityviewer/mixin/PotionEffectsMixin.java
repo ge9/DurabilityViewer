@@ -1,7 +1,7 @@
 package de.guntram.mcmod.durabilityviewer.mixin;
 
 import de.guntram.mcmod.durabilityviewer.client.gui.GuiItemDurability;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.DeltaTracker;
 import org.objectweb.asm.Opcodes;
@@ -17,15 +17,15 @@ public abstract class PotionEffectsMixin {
     @Unique
     private static GuiItemDurability gui;
 
-    @Inject(method = "renderEffects", at = @At("RETURN"))
-    private void afterRenderStatusEffects(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    @Inject(method = "extractEffects", at = @At("RETURN"))
+    private void afterRenderStatusEffects(GuiGraphicsExtractor context, DeltaTracker tickCounter, CallbackInfo ci) {
         if (gui == null)
             gui = new GuiItemDurability();
         gui.afterRenderStatusEffects(context, 0);
     }
 
-    @Inject(method = "renderHotbarAndDecorations", at = @At(value = "RETURN", opcode = Opcodes.GETFIELD, args = {"log=false"}))
-    private void beforeRenderDebugScreen(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    @Inject(method = "extractHotbarAndDecorations", at = @At(value = "RETURN", opcode = Opcodes.GETFIELD, args = {"log=false"}))
+    private void beforeRenderDebugScreen(GuiGraphicsExtractor context, DeltaTracker tickCounter, CallbackInfo ci) {
         if (gui == null)
             gui = new GuiItemDurability();
         gui.onRenderGameOverlayPost(context, 0);

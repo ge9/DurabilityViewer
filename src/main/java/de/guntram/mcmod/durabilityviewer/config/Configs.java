@@ -14,7 +14,7 @@ import fi.dy.masa.malilib.config.options.ConfigColor;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.config.options.ConfigOptionList;
 import fi.dy.masa.malilib.util.FileUtils;
-import fi.dy.masa.malilib.util.JsonUtils;
+import fi.dy.masa.malilib.util.data.json.JsonUtils;
 import net.minecraft.network.chat.Component;
 
 import java.io.File;
@@ -57,14 +57,15 @@ public class Configs implements IConfigHandler {
     }
 
     public static void loadFromFile() {
-        File configFile = new File(FileUtils.getConfigDirectoryAsPath().toFile(), CONFIG_FILE_NAME);
+        java.nio.file.Path configPath = FileUtils.getConfigDirectory();
+        File configFile = new File(configPath.toFile(), CONFIG_FILE_NAME);
 
         if (!configFile.exists()) {
             saveToFile();
         }
 
         if (configFile.exists() && configFile.isFile() && configFile.canRead()) {
-            JsonElement element = JsonUtils.parseJsonFile(configFile);
+            JsonElement element = JsonUtils.parseJsonFile(configPath);
 
             if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
@@ -74,7 +75,9 @@ public class Configs implements IConfigHandler {
     }
 
     public static void saveToFile() {
-        File dir = FileUtils.getConfigDirectoryAsPath().toFile();
+
+        java.nio.file.Path dirPath = FileUtils.getConfigDirectory();
+        File dir = dirPath.toFile();
 
         if ((dir.exists() && dir.isDirectory()) || dir.mkdirs()) {
             JsonObject root = new JsonObject();
@@ -83,7 +86,7 @@ public class Configs implements IConfigHandler {
 
             root.add("config_version", new JsonPrimitive(CONFIG_VERSION));
 
-            JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
+            JsonUtils.writeJsonToFile(root, dirPath);
 
             DurabilityViewer.LOGGER.info("[DurabilityViewer] Config Saved");
         }

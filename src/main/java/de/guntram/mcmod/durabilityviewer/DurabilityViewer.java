@@ -4,7 +4,7 @@ import de.guntram.mcmod.durabilityviewer.client.gui.GuiItemDurability;
 import de.guntram.mcmod.durabilityviewer.config.Configs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.resources.Identifier;
@@ -48,7 +48,7 @@ public class DurabilityViewer implements ClientModInitializer {
     }
 
     public void setKeyBindings() {
-        KeyBindingHelper.registerKeyBinding(showHide = new KeyMapping("key.durabilityviewer.showhide", InputConstants.Type.KEYSYM, GLFW_KEY_H, DurabilityViewerCat));
+        KeyMappingHelper.registerKeyMapping(showHide = new KeyMapping("key.durabilityviewer.showhide", InputConstants.Type.KEYSYM, GLFW_KEY_H, DurabilityViewerCat));
         ClientTickEvents.END_CLIENT_TICK.register(e -> processKeyBinds());
     }
 }
