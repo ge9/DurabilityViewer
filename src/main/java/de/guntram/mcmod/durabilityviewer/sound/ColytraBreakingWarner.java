@@ -1,8 +1,8 @@
 package de.guntram.mcmod.durabilityviewer.sound;
 
 import de.guntram.mcmod.durabilityviewer.config.Configs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
